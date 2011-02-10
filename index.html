@@ -1,0 +1,14 @@
+---
+layout: site
+title: avsej.net
+description: random technical thoughts and links
+---
+
+<h1>Sergey Avseyev</h1>
+{% if site.categories.couchbase -%}
+<ul class='archive'>
+{% for post in site.categories.couchbase -%}
+  <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+{% endfor -%}
+</ul>
+{%- endif -%}
