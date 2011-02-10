@@ -1,0 +1,3 @@
+markdown: kramdown
+url: 'https://avsej.net'
+permalink: '/:categories/:year/:title'

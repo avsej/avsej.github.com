@@ -1,0 +1,368 @@
+#!/bin/sh
+# This is confluent-units.shar, a shell archive (produced by GNU sharutils 4.15.2).
+# To extract the files from this archive, save it to some FILE, remove
+# everything before the '#!/bin/sh' line above, then type 'sh FILE'.
+#
+lock_dir=_sh06223
+# Made on 2016-12-05 23:52 MSK by <sergey.avseyev@gmail.com>.
+# Source directory was '/home/avsej/code/avsej.github.com'.
+#
+# Existing files will *not* be overwritten, unless '-c' is specified.
+#
+# This shar contains:
+# length mode       name
+# ------ ---------- ------------------------------------------
+#    451 -rw-r--r-- /usr/lib/systemd/system/confluent-connect-distributed.service
+#    442 -rw-r--r-- /usr/lib/systemd/system/confluent-control-center.service
+#    396 -rw-r--r-- /usr/lib/systemd/system/confluent-zookeeper.service
+#    498 -rw-r--r-- /usr/lib/systemd/system/confluent-schema-registry.service
+#    419 -rw-r--r-- /usr/lib/systemd/system/confluent-kafka.service
+#
+MD5SUM=${MD5SUM-md5sum}
+f=`${MD5SUM} --version | egrep '^md5sum .*(core|text)utils'`
+test -n "${f}" && md5check=true || md5check=false
+${md5check} || \
+  echo 'Note: not verifying md5sums.  Consider installing GNU coreutils.'
+if test "X$1" = "X-c"
+then keep_file=''
+else keep_file=true
+fi
+echo=echo
+save_IFS="${IFS}"
+IFS="${IFS}:"
+gettext_dir=
+locale_dir=
+set_echo=false
+
+for dir in $PATH
+do
+  if test -f $dir/gettext \
+     && ($dir/gettext --version >/dev/null 2>&1)
+  then
+    case `$dir/gettext --version 2>&1 | sed 1q` in
+      *GNU*) gettext_dir=$dir
+      set_echo=true
+      break ;;
+    esac
+  fi
+done
+
+if ${set_echo}
+then
+  set_echo=false
+  for dir in $PATH
+  do
+    if test -f $dir/shar \
+       && ($dir/shar --print-text-domain-dir >/dev/null 2>&1)
+    then
+      locale_dir=`$dir/shar --print-text-domain-dir`
+      set_echo=true
+      break
+    fi
+  done
+
+  if ${set_echo}
+  then
+    TEXTDOMAINDIR=$locale_dir
+    export TEXTDOMAINDIR
+    TEXTDOMAIN=sharutils
+    export TEXTDOMAIN
+    echo="$gettext_dir/gettext -s"
+  fi
+fi
+IFS="$save_IFS"
+if (echo "testing\c"; echo 1,2,3) | grep c >/dev/null
+then if (echo -n test; echo 1,2,3) | grep n >/dev/null
+     then shar_n= shar_c='
+'
+     else shar_n=-n shar_c= ; fi
+else shar_n= shar_c='\c' ; fi
+f=shar-touch.$$
+st1=200112312359.59
+st2=123123592001.59
+st2tr=123123592001.5 # old SysV 14-char limit
+st3=1231235901
+
+if   touch -am -t ${st1} ${f} >/dev/null 2>&1 && \
+     test ! -f ${st1} && test -f ${f}; then
+  shar_touch='touch -am -t $1$2$3$4$5$6.$7 "$8"'
+
+elif touch -am ${st2} ${f} >/dev/null 2>&1 && \
+     test ! -f ${st2} && test ! -f ${st2tr} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$1$2.$7 "$8"'
+
+elif touch -am ${st3} ${f} >/dev/null 2>&1 && \
+     test ! -f ${st3} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$2 "$8"'
+
+else
+  shar_touch=:
+  echo
+  ${echo} 'WARNING: not restoring timestamps.  Consider getting and
+installing GNU '\''touch'\'', distributed in GNU coreutils...'
+  echo
+fi
+rm -f ${st1} ${st2} ${st2tr} ${st3} ${f}
+#
+if test ! -d ${lock_dir} ; then :
+else ${echo} "lock directory ${lock_dir} exists"
+     exit 1
+fi
+if mkdir ${lock_dir}
+then ${echo} "x - created lock directory ${lock_dir}."
+else ${echo} "x - failed to create lock directory ${lock_dir}."
+     exit 1
+fi
+# ============= /usr/lib/systemd/system/confluent-connect-distributed.service ==============
+if test ! -d '/usr'; then
+  mkdir '/usr'
+if test $? -eq 0
+then ${echo} "x - created directory /usr."
+else ${echo} "x - failed to create directory /usr."
+     exit 1
+fi
+fi
+if test ! -d '/usr/lib'; then
+  mkdir '/usr/lib'
+if test $? -eq 0
+then ${echo} "x - created directory /usr/lib."
+else ${echo} "x - failed to create directory /usr/lib."
+     exit 1
+fi
+fi
+if test ! -d '/usr/lib/systemd'; then
+  mkdir '/usr/lib/systemd'
+if test $? -eq 0
+then ${echo} "x - created directory /usr/lib/systemd."
+else ${echo} "x - failed to create directory /usr/lib/systemd."
+     exit 1
+fi
+fi
+if test ! -d '/usr/lib/systemd/system'; then
+  mkdir '/usr/lib/systemd/system'
+if test $? -eq 0
+then ${echo} "x - created directory /usr/lib/systemd/system."
+else ${echo} "x - failed to create directory /usr/lib/systemd/system."
+     exit 1
+fi
+fi
+if test -n "${keep_file}" && test -f '/usr/lib/systemd/system/confluent-connect-distributed.service'
+then
+${echo} "x - SKIPPING /usr/lib/systemd/system/confluent-connect-distributed.service (file already exists)"
+
+else
+${echo} "x - extracting /usr/lib/systemd/system/confluent-connect-distributed.service (text)"
+  sed 's/^X//' << 'SHAR_EOF' > '/usr/lib/systemd/system/confluent-connect-distributed.service' &&
+X# -*- mode: conf-unix; -*-
+X[Unit]
+XDescription = Confluent Connect: Distributed Mode
+XDocumentation = http://www.confluent.io
+XAfter = network.target remote-fs.target nss-lookup.target confluent-schema-registry.service
+X
+X[Service]
+XSyslogIdentifier = confluent-connect
+XUser = confluent
+XType = simple
+XExecStart = /usr/bin/connect-distributed /etc/kafka/connect-distributed.properties
+X
+X[Install]
+XWantedBy = multi-user.target confluent-control-center.service
+SHAR_EOF
+  (set 20 16 09 05 17 38 33 '/usr/lib/systemd/system/confluent-connect-distributed.service'
+   eval "${shar_touch}") && \
+  chmod 0644 '/usr/lib/systemd/system/confluent-connect-distributed.service'
+if test $? -ne 0
+then ${echo} "restore of /usr/lib/systemd/system/confluent-connect-distributed.service failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} '/usr/lib/systemd/system/confluent-connect-distributed.service': 'MD5 check failed'
+       ) << \SHAR_EOF
+e2657fbbe339b991b98df314ccb27e6a  /usr/lib/systemd/system/confluent-connect-distributed.service
+SHAR_EOF
+
+else
+test `LC_ALL=C wc -c < '/usr/lib/systemd/system/confluent-connect-distributed.service'` -ne 451 && \
+  ${echo} "restoration warning:  size of '/usr/lib/systemd/system/confluent-connect-distributed.service' is not 451"
+  fi
+fi
+# ============= /usr/lib/systemd/system/confluent-control-center.service ==============
+if test ! -d '/usr/lib/systemd/system'; then
+  mkdir '/usr/lib/systemd/system'
+if test $? -eq 0
+then ${echo} "x - created directory /usr/lib/systemd/system."
+else ${echo} "x - failed to create directory /usr/lib/systemd/system."
+     exit 1
+fi
+fi
+if test -n "${keep_file}" && test -f '/usr/lib/systemd/system/confluent-control-center.service'
+then
+${echo} "x - SKIPPING /usr/lib/systemd/system/confluent-control-center.service (file already exists)"
+
+else
+${echo} "x - extracting /usr/lib/systemd/system/confluent-control-center.service (text)"
+  sed 's/^X//' << 'SHAR_EOF' > '/usr/lib/systemd/system/confluent-control-center.service' &&
+X# -*- mode: conf-unix; -*-
+X[Unit]
+XDescription = Confluent Connect: Control Center
+XDocumentation = http://www.confluent.io
+XAfter = network.target remote-fs.target nss-lookup.target confluent-connect-distributed.service
+X
+X[Service]
+XSyslogIdentifier = confluent-control-center
+XUser = confluent
+XType = simple
+XExecStart = /usr/bin/control-center-start /etc/confluent-control-center/control-center.properties
+X
+X[Install]
+XWantedBy = multi-user.target
+SHAR_EOF
+  (set 20 16 09 05 17 38 33 '/usr/lib/systemd/system/confluent-control-center.service'
+   eval "${shar_touch}") && \
+  chmod 0644 '/usr/lib/systemd/system/confluent-control-center.service'
+if test $? -ne 0
+then ${echo} "restore of /usr/lib/systemd/system/confluent-control-center.service failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} '/usr/lib/systemd/system/confluent-control-center.service': 'MD5 check failed'
+       ) << \SHAR_EOF
+4771119c183c70558f617511d37d95f3  /usr/lib/systemd/system/confluent-control-center.service
+SHAR_EOF
+
+else
+test `LC_ALL=C wc -c < '/usr/lib/systemd/system/confluent-control-center.service'` -ne 442 && \
+  ${echo} "restoration warning:  size of '/usr/lib/systemd/system/confluent-control-center.service' is not 442"
+  fi
+fi
+# ============= /usr/lib/systemd/system/confluent-zookeeper.service ==============
+if test -n "${keep_file}" && test -f '/usr/lib/systemd/system/confluent-zookeeper.service'
+then
+${echo} "x - SKIPPING /usr/lib/systemd/system/confluent-zookeeper.service (file already exists)"
+
+else
+${echo} "x - extracting /usr/lib/systemd/system/confluent-zookeeper.service (text)"
+  sed 's/^X//' << 'SHAR_EOF' > '/usr/lib/systemd/system/confluent-zookeeper.service' &&
+X# -*- mode: conf-unix; -*-
+X[Unit]
+XDescription = Confluent Connect: Zookeeper
+XDocumentation = http://www.confluent.io
+XAfter = network.target remote-fs.target nss-lookup.target
+X
+X[Service]
+XSyslogIdentifier = confluent-zookeeper
+XUser = confluent
+XType = simple
+XExecStart = /usr/bin/zookeeper-server-start /etc/kafka/zookeeper.properties
+X
+X[Install]
+XWantedBy = multi-user.target confluent-kafka.service
+SHAR_EOF
+  (set 20 16 09 05 17 38 33 '/usr/lib/systemd/system/confluent-zookeeper.service'
+   eval "${shar_touch}") && \
+  chmod 0644 '/usr/lib/systemd/system/confluent-zookeeper.service'
+if test $? -ne 0
+then ${echo} "restore of /usr/lib/systemd/system/confluent-zookeeper.service failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} '/usr/lib/systemd/system/confluent-zookeeper.service': 'MD5 check failed'
+       ) << \SHAR_EOF
+b059a00e2d4d25137d7c42a72533728a  /usr/lib/systemd/system/confluent-zookeeper.service
+SHAR_EOF
+
+else
+test `LC_ALL=C wc -c < '/usr/lib/systemd/system/confluent-zookeeper.service'` -ne 396 && \
+  ${echo} "restoration warning:  size of '/usr/lib/systemd/system/confluent-zookeeper.service' is not 396"
+  fi
+fi
+# ============= /usr/lib/systemd/system/confluent-schema-registry.service ==============
+if test -n "${keep_file}" && test -f '/usr/lib/systemd/system/confluent-schema-registry.service'
+then
+${echo} "x - SKIPPING /usr/lib/systemd/system/confluent-schema-registry.service (file already exists)"
+
+else
+${echo} "x - extracting /usr/lib/systemd/system/confluent-schema-registry.service (text)"
+  sed 's/^X//' << 'SHAR_EOF' > '/usr/lib/systemd/system/confluent-schema-registry.service' &&
+X# -*- mode: conf-unix; -*-
+X[Unit]
+XDescription = Confluent Connect: Schema Registry
+XDocumentation = http://www.confluent.io
+XAfter = network.target remote-fs.target nss-lookup.target confluent-kafka.service
+X
+X[Service]
+XSyslogIdentifier = confluent-schema-registry
+XUser = confluent
+XType = simple
+XExecStart = /usr/bin/schema-registry-start /etc/schema-registry/schema-registry.properties
+XRestart = on-failure
+XRestartSec = 10
+X
+X[Install]
+XWantedBy = multi-user.target confluent-connect-distributed.service
+SHAR_EOF
+  (set 20 16 12 05 23 23 22 '/usr/lib/systemd/system/confluent-schema-registry.service'
+   eval "${shar_touch}") && \
+  chmod 0644 '/usr/lib/systemd/system/confluent-schema-registry.service'
+if test $? -ne 0
+then ${echo} "restore of /usr/lib/systemd/system/confluent-schema-registry.service failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} '/usr/lib/systemd/system/confluent-schema-registry.service': 'MD5 check failed'
+       ) << \SHAR_EOF
+9c30ac6e217cb285f22777c08623dc8d  /usr/lib/systemd/system/confluent-schema-registry.service
+SHAR_EOF
+
+else
+test `LC_ALL=C wc -c < '/usr/lib/systemd/system/confluent-schema-registry.service'` -ne 498 && \
+  ${echo} "restoration warning:  size of '/usr/lib/systemd/system/confluent-schema-registry.service' is not 498"
+  fi
+fi
+# ============= /usr/lib/systemd/system/confluent-kafka.service ==============
+if test -n "${keep_file}" && test -f '/usr/lib/systemd/system/confluent-kafka.service'
+then
+${echo} "x - SKIPPING /usr/lib/systemd/system/confluent-kafka.service (file already exists)"
+
+else
+${echo} "x - extracting /usr/lib/systemd/system/confluent-kafka.service (text)"
+  sed 's/^X//' << 'SHAR_EOF' > '/usr/lib/systemd/system/confluent-kafka.service' &&
+X# -*- mode: conf-unix; -*-
+X[Unit]
+XDescription = Confluent Connect: Kafka
+XDocumentation = http://www.confluent.io
+XAfter = network.target remote-fs.target nss-lookup.target confluent-zookeeper.service
+X
+X[Service]
+XSyslogIdentifier = confluent-kafka
+XUser = confluent
+XType = simple
+XExecStart = /usr/bin/kafka-server-start /etc/kafka/server.properties
+X
+X[Install]
+XWantedBy = multi-user.target confluent-schema-registry.service
+SHAR_EOF
+  (set 20 16 09 05 17 38 33 '/usr/lib/systemd/system/confluent-kafka.service'
+   eval "${shar_touch}") && \
+  chmod 0644 '/usr/lib/systemd/system/confluent-kafka.service'
+if test $? -ne 0
+then ${echo} "restore of /usr/lib/systemd/system/confluent-kafka.service failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} '/usr/lib/systemd/system/confluent-kafka.service': 'MD5 check failed'
+       ) << \SHAR_EOF
+854c606421d9a5131c4acccce573337b  /usr/lib/systemd/system/confluent-kafka.service
+SHAR_EOF
+
+else
+test `LC_ALL=C wc -c < '/usr/lib/systemd/system/confluent-kafka.service'` -ne 419 && \
+  ${echo} "restoration warning:  size of '/usr/lib/systemd/system/confluent-kafka.service' is not 419"
+  fi
+fi
+if rm -fr ${lock_dir}
+then ${echo} "x - removed lock directory ${lock_dir}."
+else ${echo} "x - failed to remove lock directory ${lock_dir}."
+     exit 1
+fi
+exit 0

@@ -1,0 +1,30 @@
+---
+layout: nil
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>avsej.net: random technical thoughts and links</title>
+  <link href="{{site.url}}/atom.xml" rel="self"/>
+  <link href="{{site.url}}/"/>
+  <updated>{{ site.categories.couchbase.first.date | date_to_xmlschema }}</updated>
+  <id>{{site.url}}/</id>
+  <author>
+    <name>Sergey Avseyev</name>
+    <email>sergey.avseyev@gmail.com</email>
+  </author>
+{%- for post in site.categories.couchbase %}
+  <entry>
+    <title>{{ post.title }}</title>
+    <link href="{{site.url}}{{post.url}}"/>
+    <updated>{{ post.date | date_to_xmlschema }}</updated>
+    <id>{{site.url}}{{post.id}}/</id>
+    <author>
+        <name>Sergey Avseyev</name>
+        <email>sergey.avseyev@gmail.com</email>
+    </author>
+    <content type="html">
+{{ post.content | xml_escape }}
+    </content>
+  </entry>
+{%- endfor %}
+</feed>

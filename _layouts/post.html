@@ -1,0 +1,14 @@
+---
+layout: site
+---
+<article>
+<h1><a class="back" href="{{ site.url }}">&larr;</a>{{page.title}}</h1>
+{{ content }}
+</article>
+<footer>
+{% if page.target %}<p>Read original article: <a href="{{ page.target }}">{{ page.target }}</a></p>{% endif %}
+<p>
+  Written on <em title="{{ page.date | date_to_xmlschema }}">{{ page.date | date_to_long_string }}</em>.
+  <a href="mailto:comments@avsej.net?subject=RE: {{ page.title | url_encode }}">Leave feedback</a>.
+</p>
+</footer>
